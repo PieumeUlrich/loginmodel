@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Box,
   Button,
@@ -9,6 +9,7 @@ import {
   Grid,
   TextField
 } from '@mui/material';
+import { proxy } from 'src/utils/setupProxy';
 
 const states = [
   {
@@ -41,6 +42,11 @@ export const AccountProfileDetails = (props) => {
       [event.target.name]: event.target.value
     });
   };
+
+  useEffect(() => {
+    const userId = localStorage.getItem('userId')
+    const token = localStorage.getItem('token')
+  },[])
 
   return (
     <form
@@ -147,7 +153,7 @@ export const AccountProfileDetails = (props) => {
                 onChange={handleChange}
                 required
                 select
-                SelectProps={{ native: true }}
+                SelectProps={{ native: false }}
                 value={values.state}
                 variant="outlined"
               >

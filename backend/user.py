@@ -49,21 +49,24 @@ class TestResource(Resource):
 @user.route('/users')
 class Users(Resource):
     @user.marshal_list_with(user_model)
-    @jwt_required
+    @jwt_required()
     def get(self):
-        return User.query.all()
+        users = list()
+        for user in User.query.all():
+            users.append(user)
+        return users
 
  
 @user.route('/user/<int:id>')
 class UserId(Resource):
-    @user.marshal_with(user_model)
-    @jwt_required
+    # @user.marshal_with(user_model)
+    @jwt_required()
     def get(self, id):
         user = User.query.get_or_404(id)
         return user
 
     # @api.marshal_with(user_model) This line tells the funcion to return data only in that format
-    @jwt_required
+    @jwt_required()
     def put(self, id):
         cur_user = User.query.get_or_404(id)
         udata = request.get_json()
@@ -71,7 +74,7 @@ class UserId(Resource):
         cur_user.update(name=udata['name'], email=udata['email'], update_on=datetime.now())
         return make_response(jsonify(update_msg), 201)
 
-    @jwt_required
+    @jwt_required()
     def delete(self, id):
         cur_user = User.query.get_or_404(id)
         cur_user.delete()

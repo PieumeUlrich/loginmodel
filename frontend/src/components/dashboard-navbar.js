@@ -1,12 +1,15 @@
 import PropTypes from 'prop-types';
+import { useEffect } from 'react'
 import styled from '@emotion/styled';
-import { AppBar, Avatar, Badge, Box, IconButton, Toolbar, Tooltip } from '@mui/material';
+import { AppBar, Avatar, Badge, Box, Button, IconButton, Toolbar, Tooltip } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import { Bell as BellIcon } from '../icons/bell';
 import { UserCircle as UserCircleIcon } from '../icons/user-circle';
 import { Users as UsersIcon } from '../icons/users';
-import { useAuth, logout } from 'src/utils/auth';
+import { useRouter } from 'next/router';
+import {userService} from './../services/user.service'
+
 
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -15,14 +18,10 @@ const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
 
 export const DashboardNavbar = (props) => {
   const { onSidebarOpen, ...other } = props;
-  cosnt [logged] = useAuth()
+  const router = useRouter();
 
   const handleLogout = () => {
-    fetch('http://localhost:5000/auth/logout')
-    .then(send => send.json())
-    
-    logout()
-    router.push('/login')
+    userService.logout()
   }
   return (
     <>
@@ -87,6 +86,15 @@ export const DashboardNavbar = (props) => {
           >
             <UserCircleIcon fontSize="small" />
           </Avatar>
+          <Tooltip title="Logout">
+            <IconButton sx={{ ml: 1 }}>
+              <Button
+                fontSize="small"
+                variant="contained"
+                onClick={handleLogout}
+              > Logout </Button>
+            </IconButton>
+          </Tooltip>
         </Toolbar>
       </DashboardNavbarRoot>
     </>

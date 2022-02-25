@@ -7,11 +7,21 @@ import { Box, Button, Container, Grid, Link, TextField, Typography, Checkbox } f
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Facebook as FacebookIcon } from '../icons/facebook';
 import { Google as GoogleIcon } from '../icons/google';
-import { login } from 'src/utils/auth';
+import { proxy } from 'src/utils/setupProxy';
+import useToken from '/src/utils/useToken';
+import {userService} from './../services/user.service'
+import { useEffect } from 'react'
+// import { login } from 'src/utils/auth';
 
 
 const Login = () => {
   const router = useRouter();
+  const { token, setToken } = useToken()
+  useEffect(() => {
+    // Prefetch the dashboard page
+      if(router.query.returnUrl) router.prefetch(router.query.returnUrl)
+      else router.prefetch('/dashboard')
+  }, [])  
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -38,30 +48,58 @@ const Login = () => {
       )
       }),
     onSubmit: () => {
-      // router.push('/');
       const data = {
         email: formik.values.email,
         password: formik.values.password,
         remember: formik.values.remember
       }
-      const opts = {
-        method: "POST",
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify(data)
-      }
-      fetch('http://localhost:5000/auth/login', opts)
-      .then(send => send.json())
-      .then(res => {
-        login(res.access_token)
-        alert(res[0].msg)
-        router.push('/');
-      })
-      .catch(err => console.error(err.msg))
+      loginUser(data)
+      // const opts = {
+      //   method: "POST",
+      //   headers: {
+      //     'content-type': 'application/json',
+      //   },
+      //   body: JSON.stringify(data)
+      // }
+      // fetch(`${proxy}/auth/login`, opts)
+      // .then(send => send.json())
+      // .then(res => {
+      //   if(res[1].status === 201){
+      //     // login(res[1].access_token)
+      //     // localStorage.setItem('userId', res[1].userId);
+      //     // localStorage.setItem('token', res[1].access_token);
+      //     setToken(res[1].access_token)
+      //     alert(res[0].msg)
+      //     router.push('/dashboard');
+      //   }
+      //   else {
+      //     formik.values.email = ""
+      //     formik.values.password = ""
+      //     alert(res[0].msg)
+      //   }
+      // })
+      // .catch(err => console.error(err.msg))
     }
   });
 
+  function loginUser(data) {
+    return userService.login(data)
+      .then((res) => {
+        if(res[1].status === 201){
+          localStorage.setItem('user', JSON.stringify(res[1].user));
+          localStorage.setItem('token', JSON.stringify(res[1].access_token));
+          alert(res[0].msg)
+          if(router.query.returnUrl){
+            router.push(router.query.returnUrl)
+          }
+          else router.push('/dashboard')
+        }
+        else {
+          alert(res[0].msg)
+        }
+      })
+      .catch(err => err.msg);
+  }
   return (
     <>
       <Head>
@@ -204,7 +242,7 @@ const Login = () => {
             <Box sx={{ py: 2 }}>
               <Button
                 color="primary"
-                disabled={formik.isSubmitting}
+                // disabled={formik.isSubmitting}
                 fullWidth
                 size="large"
                 type="submit"

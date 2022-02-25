@@ -19,10 +19,6 @@ def create_app(config):
     login_manager.login_view = 'login'
     JWTManager(app)
 
-    api = Api(app, doc='/menu')
-
-    api.add_namespace(user)
-    api.add_namespace(auth)
 
     @app.shell_context_processor
     def make_shell_context():
@@ -30,7 +26,11 @@ def create_app(config):
             "db": db,
             "User": User
             }
-    # with app.app_context():
-    #     # Imports
-    #     db.create_all()
-    #     return app
+    with app.app_context():
+        # Imports
+        api = Api(app, doc='/menu')
+        api.add_namespace(user)
+        api.add_namespace(auth)
+
+        db.create_all()
+        return app

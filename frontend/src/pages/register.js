@@ -16,6 +16,8 @@ import {
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useEffect, useState } from 'react';
+import {userService} from './../services/user.service'
+
 
 const Register = () => {
   const [message, setMessage] = useState('')
@@ -70,32 +72,31 @@ const Register = () => {
       if(formik.values.password === formik.values.confirmPassword){
         delete formik.values.confirmPassword;
         
-        // console.log(formik.values.firstName + ' ' + formik.values.lastName)
-        // router.push('/');
         const data = {
           email: formik.values.email,
           name: formik.values.firstName + ' ' + formik.values.lastName,
           password: formik.values.password,
         }
-        const opts = {
-          method: "POST",
-          headers: {
-            'content-type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        }
-        fetch('http://localhost:5000/auth/signup', opts)
-        .then(send => send.json())
+        // const opts = {
+        //   method: "POST",
+        //   headers: {
+        //     'content-type': 'application/json',
+        //   },
+        //   body: JSON.stringify(data)
+        // }
+        // fetch(`${proxy}/auth/signup`, opts)
+        // .then(send => send.json())
+      userService.register(data)
         .then(res => {
           setMessage(res.msg)
           setStatus(res.status)
           setShow(true)
-          formik.values.initialValues
-          // formik.values.firstName = ""
-          // formik.values.lastName = ""
-          // formik.values.email = ""
-          // formik.values.password = ""
-          // formik.values.confirmPassword = ""
+          formik.values.policy = false
+          formik.values.firstName = ""
+          formik.values.lastName = ""
+          formik.values.email = ""
+          formik.values.password = ""
+          formik.values.confirmPassword = ""
         })
         .catch(err => console.error(err.msg))
       }
@@ -103,13 +104,13 @@ const Register = () => {
     }
   });
 
-  useEffect(() => {
-    fetch('http://localhost:5000/user/test').then(response => {
-      if(response.ok){
-        return response.json()
-      }
-    }).then(data => console.log(data))
-  },[])
+  // useEffect(() => {
+  //   fetch(`${proxy}/user/users`).then(response => {
+  //     if(response.ok){
+  //       return response.json()
+  //     }
+  //   }).then(data => console.log(data))
+  // },[])
   return (
     <>
       <Head>

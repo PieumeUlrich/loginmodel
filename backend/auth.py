@@ -68,9 +68,11 @@ class Login(Resource):
                 login_msg_success,
                 {
                     "access_token":access_token,
-                    "refresh_token":refresh_token
+                    "refresh_token":refresh_token,
+                    "status": 201,
+                    "user": {"id":user.id, "name":user.name, "email":user.email}
                 }), 201)
-        return make_response(jsonify(error_msg), 202) # if user doesn't exist or password is wrong, reload the page
+        return make_response(jsonify(error_msg, {"status":202}), 202) # if user doesn't exist or password is wrong, reload the page
         # if the above check passes, then we know the user has the right credentials
 
 @auth.route('/logout')

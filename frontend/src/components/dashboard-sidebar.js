@@ -18,7 +18,7 @@ import { NavItem } from './nav-item';
 
 const items = [
   {
-    href: '/',
+    href: '/dashboard',
     icon: (<ChartBarIcon fontSize="small" />),
     title: 'Dashboard'
   },
@@ -42,11 +42,11 @@ const items = [
     icon: (<CogIcon fontSize="small" />),
     title: 'Settings'
   },
-  {
-    href: '/login',
-    icon: (<LockIcon fontSize="small" />),
-    title: 'Login'
-  },
+  // { 
+  //   href: '/login',
+  //   icon: (<LockIcon fontSize="small" />),
+  //   title: 'Login'
+  // },
   {
     href: '/register',
     icon: (<UserAddIcon fontSize="small" />),
@@ -161,7 +161,7 @@ export const DashboardSidebar = (props) => {
             />
           ))}
         </Box>
-        <Divider sx={{ borderColor: '#2D3748' }} />
+        {/* <Divider sx={{ borderColor: '#2D3748' }} />
         <Box
           sx={{
             px: 2,
@@ -211,7 +211,7 @@ export const DashboardSidebar = (props) => {
               Pro Live Preview
             </Button>
           </NextLink>
-        </Box>
+        </Box> */}
       </Box>
     </>
   );
