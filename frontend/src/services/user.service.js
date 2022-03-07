@@ -42,23 +42,11 @@ function register(user) {
 }
 
 function getAll() {
-    try{
-        let result = fetchWrapper.get(`${baseUrl}/user/users`);
-        console.log(result)
-    }
-    catch(error){
-        console.log(error)
-    }
+    return fetchWrapper.get(`${baseUrl}/user/users`);
 }
 
 function getById(id) {
-    try{
-        let result = fetchWrapper.get(`${baseUrl}/user/user/${id}`);
-        console.log(result)
-        }
-    catch(error){
-        console.log(error)
-    }
+    return fetchWrapper.get(`${baseUrl}/user/user/${id}`);
 }
 
 function update(id, params) {
