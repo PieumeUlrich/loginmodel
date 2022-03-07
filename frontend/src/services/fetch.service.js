@@ -2,7 +2,7 @@ import getConfig from 'next/config';
 
 import { userService } from './user.service';
 
-const { publicRuntimeConfig } = getConfig();
+const publicRuntimeConfig  = getConfig();
 
 export const fetchWrapper = {
     get,
@@ -51,11 +51,10 @@ function _delete(url) {
 
 function authHeader(url) {
     // return auth header with jwt if user is logged in and request is to the api url
-    const user = userService.user;
-    console.log(user)
-    const isLoggedIn = user && user.token;
+    const user = userService;
+    const isLoggedIn = user.token;
     const isApiUrl = url.startsWith(publicRuntimeConfig.apiUrl);
-    if (isLoggedIn && isApiUrl) {
+    if (isLoggedIn) {
         return { Authorization: `Bearer ${user.token}` };
     } else {
         return {};
@@ -65,9 +64,9 @@ function authHeader(url) {
 function handleResponse(response) {
     return response.text().then(text => {
         const data = text && JSON.parse(text);
-        
+        console.log(response)
         if (!response.ok) {
-            if ([401, 403].includes(response.status) && userService.userValue) {
+            if ([401, 403].includes(response.status) && !userService.token) {
                 // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
                 userService.logout();
             }

@@ -59,7 +59,7 @@ class Users(Resource):
  
 @user.route('/user/<int:id>')
 class UserId(Resource):
-    # @user.marshal_with(user_model)
+    @user.marshal_with(user_model)
     @jwt_required()
     def get(self, id):
         user = User.query.get_or_404(id)

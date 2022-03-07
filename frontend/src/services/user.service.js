@@ -9,10 +9,12 @@ const { publicRuntimeConfig } = getConfig();
 const baseUrl = `${proxy}`;
 // const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('user')));
 const userSubject = process.browser && JSON.parse(localStorage.getItem('user'));
+const token = process.browser && JSON.parse(localStorage.getItem('token'));
 
 export const userService = {
     // user: userSubject.asObservable(),
     user: userSubject,
+    token,
     // get userValue () { return userSubject.value },
     login,
     logout,
@@ -44,11 +46,11 @@ function getAll() {
 }
 
 function getById(id) {
-    return fetchWrapper.get(`${baseUrl}user/${id}`);
+    return fetchWrapper.get(`${baseUrl}/user/user/${id}`);
 }
 
 function update(id, params) {
-    return fetchWrapper.put(`${baseUrl}/${id}`, params)
+    return fetchWrapper.put(`${baseUrl}/user/user/${id}`, params)
         .then(x => {
             // update stored user if the logged in user updated their own record
             if (id === userSubject.value.id) {

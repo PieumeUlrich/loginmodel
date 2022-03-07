@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import NextLink from 'next/link';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Box, Button, Container, Grid, Link, TextField, Typography, Checkbox } from '@mui/material';
@@ -11,7 +11,6 @@ import { proxy } from 'src/utils/setupProxy';
 import useToken from '/src/utils/useToken';
 import {userService} from './../services/user.service'
 import { useEffect } from 'react'
-// import { login } from 'src/utils/auth';
 
 
 const Login = () => {
@@ -19,7 +18,7 @@ const Login = () => {
   const { token, setToken } = useToken()
   useEffect(() => {
     // Prefetch the dashboard page
-      if(router.query.returnUrl) router.prefetch(router.query.returnUrl)
+      if(router.query.returnUrl && true) router.prefetch(router.query.returnUrl)
       else router.prefetch('/dashboard')
   }, [])  
   const formik = useFormik({
@@ -54,43 +53,20 @@ const Login = () => {
         remember: formik.values.remember
       }
       loginUser(data)
-      // const opts = {
-      //   method: "POST",
-      //   headers: {
-      //     'content-type': 'application/json',
-      //   },
-      //   body: JSON.stringify(data)
-      // }
-      // fetch(`${proxy}/auth/login`, opts)
-      // .then(send => send.json())
-      // .then(res => {
-      //   if(res[1].status === 201){
-      //     // login(res[1].access_token)
-      //     // localStorage.setItem('userId', res[1].userId);
-      //     // localStorage.setItem('token', res[1].access_token);
-      //     setToken(res[1].access_token)
-      //     alert(res[0].msg)
-      //     router.push('/dashboard');
-      //   }
-      //   else {
-      //     formik.values.email = ""
-      //     formik.values.password = ""
-      //     alert(res[0].msg)
-      //   }
-      // })
-      // .catch(err => console.error(err.msg))
     }
   });
 
   function loginUser(data) {
+    const nextRoute = router.query.returnUrl
     return userService.login(data)
-      .then((res) => {
+      .then(res => {
         if(res[1].status === 201){
           localStorage.setItem('user', JSON.stringify(res[1].user));
           localStorage.setItem('token', JSON.stringify(res[1].access_token));
-          alert(res[0].msg)
-          if(router.query.returnUrl){
-            router.push(router.query.returnUrl)
+          if(router.query.returnUrl && true){
+            router.push(nextRoute)
+            console.log(router)
+            // alert(res[0].msg)
           }
           else router.push('/dashboard')
         }
@@ -116,7 +92,7 @@ const Login = () => {
       >
         <Container maxWidth="sm">
           <NextLink
-            href="/"
+            href="/dashboard"
             passHref
           >
             <Button

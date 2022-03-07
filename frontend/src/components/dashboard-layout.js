@@ -30,7 +30,7 @@ export const DashboardLayout = (props) => {
   //     .then(response => response.json())
   //     .then(data => console.log(data)
   //     )
-  userService.getAll()
+  // userService.getAll()
   },[])
 
   return (

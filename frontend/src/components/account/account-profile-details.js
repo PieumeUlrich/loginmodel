@@ -10,6 +10,7 @@ import {
   TextField
 } from '@mui/material';
 import { proxy } from 'src/utils/setupProxy';
+import {userService} from './../../services/user.service'
 
 const states = [
   {
@@ -27,10 +28,11 @@ const states = [
 ];
 
 export const AccountProfileDetails = (props) => {
+  const initValues = process.browser && JSON.parse(localStorage.getItem('user'));
   const [values, setValues] = useState({
-    firstName: 'Katarina',
-    lastName: 'Smith',
-    email: 'demo@devias.io',
+    firstName: initValues.name.split(" ")[0],
+    lastName: initValues.name.split(" ")[1],
+    email: initValues.email,
     phone: '',
     state: 'Alabama',
     country: 'USA'
@@ -43,15 +45,24 @@ export const AccountProfileDetails = (props) => {
     });
   };
 
-  useEffect(() => {
-    const userId = localStorage.getItem('userId')
-    const token = localStorage.getItem('token')
-  },[])
+  const handleUpdate = () => {
+    values.name = `${values.firstName} ${values.lastName}`
+    delete values.state
+    delete values.phone
+    delete values.country
+    delete values.firstName
+    delete values.lastName
+    console.log(values)
+    userService.update(initValues.id, values)
+  }
+
+  useEffect( () => {
+    userService.getById(initValues.id)
+  }, [])
 
   return (
     <form
       autoComplete="off"
-      noValidate
       {...props}
     >
       <Card>
@@ -180,6 +191,7 @@ export const AccountProfileDetails = (props) => {
           <Button
             color="primary"
             variant="contained"
+            onClick={handleUpdate}
           >
             Save details
           </Button>

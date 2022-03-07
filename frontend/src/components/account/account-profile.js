@@ -14,10 +14,11 @@ const user = {
   city: 'Los Angeles',
   country: 'USA',
   jobTitle: 'Senior Developer',
-  name: 'Katarina Smith',
   timezone: 'GTM-7'
 };
+const userB = process.browser && JSON.parse(localStorage.getItem("user"))
 
+// console.log(userB.name)
 export const AccountProfile = (props) => (
   <Card {...props}>
     <CardContent>
@@ -41,7 +42,7 @@ export const AccountProfile = (props) => (
           gutterBottom
           variant="h5"
         >
-          {user.name}
+          {userB.name}
         </Typography>
         <Typography
           color="textSecondary"
