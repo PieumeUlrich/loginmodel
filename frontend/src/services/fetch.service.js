@@ -72,7 +72,12 @@ function handleResponse(response) {
             }
 
             const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
+            try{
+                return Promise.reject(error);
+            }
+            catch{
+                return response
+            }
         }
 
         return data;
