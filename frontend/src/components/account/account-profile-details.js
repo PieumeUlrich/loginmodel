@@ -28,11 +28,11 @@ const states = [
 ];
 
 export const AccountProfileDetails = (props) => {
-  const initValues = process.browser && JSON.parse(localStorage.getItem('user'));
+  // const initValues = process.browser && JSON.parse(localStorage.getItem('user'));
   const [values, setValues] = useState({
-    firstName: initValues.name.split(" ")[0],
-    lastName: initValues.name.split(" ")[1],
-    email: initValues.email,
+    firstName: "Pieume",
+    lastName: "Ulrich",
+    email: "test@gmail.com",
     phone: '',
     state: 'Alabama',
     country: 'USA'
@@ -45,20 +45,20 @@ export const AccountProfileDetails = (props) => {
     });
   };
 
-  const handleUpdate = () => {
-    values.name = `${values.firstName} ${values.lastName}`
-    delete values.state
-    delete values.phone
-    delete values.country
-    delete values.firstName
-    delete values.lastName
-    console.log(values)
-    userService.update(initValues.id, values)
-  }
+  // const handleUpdate = () => {
+  //   values.name = `${values.firstName} ${values.lastName}`
+  //   delete values.state
+  //   delete values.phone
+  //   delete values.country
+  //   delete values.firstName
+  //   delete values.lastName
+  //   console.log(values)
+  //   userService.update(initValues.id, values)
+  // }
 
-  useEffect( () => {
-    userService.getById(initValues.id)
-  }, [])
+  // useEffect( () => {
+  //   userService.getById(initValues.id)
+  // }, [])
 
   return (
     <form
@@ -86,7 +86,7 @@ export const AccountProfileDetails = (props) => {
                 helperText="Please specify the first name"
                 label="First name"
                 name="firstName"
-                onChange={handleChange}
+                // onChange={handleChange}
                 required
                 value={values.firstName}
                 variant="outlined"
@@ -191,7 +191,7 @@ export const AccountProfileDetails = (props) => {
           <Button
             color="primary"
             variant="contained"
-            onClick={handleUpdate}
+            // onClick={handleUpdate}
           >
             Save details
           </Button>

@@ -11,6 +11,7 @@ import {
 
 const user = {
   avatar: '/static/images/avatars/avatar_6.png',
+  name: "Pieume Ulrich",
   city: 'Los Angeles',
   country: 'USA',
   jobTitle: 'Senior Developer',
@@ -42,7 +43,7 @@ export const AccountProfile = (props) => (
           gutterBottom
           variant="h5"
         >
-          {userB.name}
+          {user.name}
         </Typography>
         <Typography
           color="textSecondary"

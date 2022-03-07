@@ -16,7 +16,7 @@ import {
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useEffect, useState } from 'react';
-import {userService} from './../services/user.service'
+// import {userService} from './../services/user.service'
 
 
 const Register = () => {
@@ -86,23 +86,24 @@ const Register = () => {
         // }
         // fetch(`${proxy}/auth/signup`, opts)
         // .then(send => send.json())
-      userService.register(data)
-        .then(res => {
-          setMessage(res.msg)
-          setStatus(res.status)
-          setShow(true)
-          formik.values.policy = false
-          formik.values.firstName = ""
-          formik.values.lastName = ""
-          formik.values.email = ""
-          formik.values.password = ""
-          formik.values.confirmPassword = ""
-        })
-        .catch(err => console.error(err.msg))
-      }
-      else alert('Passwords do not match');
+      // userService.register(data)
+      //   .then(res => {
+      //     setMessage(res.msg)
+      //     setStatus(res.status)
+      //     setShow(true)
+      //     formik.values.policy = false
+      //     formik.values.firstName = ""
+      //     formik.values.lastName = ""
+      //     formik.values.email = ""
+      //     formik.values.password = ""
+      //     formik.values.confirmPassword = ""
+      //   })
+      //   .catch(err => console.error(err.msg))
+      // }
+      // else alert('Passwords do not match');
     }
-  });
+  }
+  })
 
   // useEffect(() => {
   //   fetch(`${proxy}/user/users`).then(response => {

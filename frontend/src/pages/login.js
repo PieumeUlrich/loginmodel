@@ -7,20 +7,20 @@ import { Box, Button, Container, Grid, Link, TextField, Typography, Checkbox } f
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Facebook as FacebookIcon } from '../icons/facebook';
 import { Google as GoogleIcon } from '../icons/google';
-import { proxy } from 'src/utils/setupProxy';
-import useToken from '/src/utils/useToken';
-import {userService} from './../services/user.service'
-import { useEffect } from 'react'
+// import { proxy } from 'src/utils/setupProxy';
+// import useToken from '/src/utils/useToken';
+// import {userService} from './../services/user.service'
+// import { useEffect } from 'react'
 
 
 const Login = () => {
-  const router = useRouter();
-  const { token, setToken } = useToken()
-  useEffect(() => {
-    // Prefetch the dashboard page
-      if(router.query.returnUrl && true) router.prefetch(router.query.returnUrl)
-      else router.prefetch('/dashboard')
-  }, [])  
+  // const router = useRouter();
+  // const { token, setToken } = useToken()
+  // useEffect(() => {
+  //   // Prefetch the dashboard page
+  //     if(router.query.returnUrl && true) router.prefetch(router.query.returnUrl)
+  //     else router.prefetch('/dashboard')
+  // }, [])  
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -52,30 +52,30 @@ const Login = () => {
         password: formik.values.password,
         remember: formik.values.remember
       }
-      loginUser(data)
+      // loginUser(data)
     }
   });
 
-  function loginUser(data) {
-    const nextRoute = router.query.returnUrl
-    return userService.login(data)
-      .then(res => {
-        if(res[1].status === 201){
-          localStorage.setItem('user', JSON.stringify(res[1].user));
-          localStorage.setItem('token', JSON.stringify(res[1].access_token));
-          if(router.query.returnUrl && true){
-            router.push(nextRoute)
-            console.log(router)
-            // alert(res[0].msg)
-          }
-          else router.push('/dashboard')
-        }
-        else {
-          alert(res[0].msg)
-        }
-      })
-      .catch(err => err.msg);
-  }
+  // function loginUser(data) {
+  //   const nextRoute = router.query.returnUrl
+  //   return userService.login(data)
+  //     .then(res => {
+  //       if(res[1].status === 201){
+  //         localStorage.setItem('user', JSON.stringify(res[1].user));
+  //         localStorage.setItem('token', JSON.stringify(res[1].access_token));
+  //         if(router.query.returnUrl && true){
+  //           router.push(nextRoute)
+  //           console.log(router)
+  //           // alert(res[0].msg)
+  //         }
+  //         else router.push('/dashboard')
+  //       }
+  //       else {
+  //         alert(res[0].msg)
+  //       }
+  //     })
+  //     .catch(err => err.msg);
+  // }
   return (
     <>
       <Head>
@@ -92,7 +92,7 @@ const Login = () => {
       >
         <Container maxWidth="sm">
           <NextLink
-            href="/dashboard"
+            href="/"
             passHref
           >
             <Button

@@ -8,7 +8,7 @@ import { Bell as BellIcon } from '../icons/bell';
 import { UserCircle as UserCircleIcon } from '../icons/user-circle';
 import { Users as UsersIcon } from '../icons/users';
 import { useRouter } from 'next/router';
-import {userService} from './../services/user.service'
+// import {userService} from './../services/user.service'
 
 
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
@@ -20,9 +20,9 @@ export const DashboardNavbar = (props) => {
   const { onSidebarOpen, ...other } = props;
   const router = useRouter();
 
-  const handleLogout = () => {
-    userService.logout()
-  }
+  // const handleLogout = () => {
+  //   userService.logout()
+  // }
   return (
     <>
       <DashboardNavbarRoot
@@ -91,7 +91,7 @@ export const DashboardNavbar = (props) => {
               <Button
                 fontSize="small"
                 variant="contained"
-                onClick={handleLogout}
+                // onClick={handleLogout}
               > Logout </Button>
             </IconButton>
           </Tooltip>

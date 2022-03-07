@@ -3,8 +3,8 @@ import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { DashboardNavbar } from './dashboard-navbar';
 import { DashboardSidebar } from './dashboard-sidebar';
-import { proxy } from 'src/utils/setupProxy';
-import { userService } from 'src/services/user.service';
+// import { proxy } from 'src/utils/setupProxy';
+// import { userService } from 'src/services/user.service';
 
 const DashboardLayoutRoot = styled('div')(({ theme }) => ({
   display: 'flex',
