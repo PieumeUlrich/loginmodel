@@ -16,7 +16,7 @@ function get(url) {
         method: 'GET',
         headers: authHeader(url)
     };
-    return fetch(url, requestOptions).then(handleResponse);
+    return fetch(url, requestOptions)
 }
 
 function post(url, body) {
@@ -26,7 +26,7 @@ function post(url, body) {
         // credentials: 'include',
         body: JSON.stringify(body)
     };
-    return fetch(url, requestOptions).then(handleResponse);
+    // return fetch(url, requestOptions).then(handleResponse);
 }
 
 function put(url, body) {
@@ -35,7 +35,7 @@ function put(url, body) {
         headers: { 'Content-Type': 'application/json', ...authHeader(url) },
         body: JSON.stringify(body)
     };
-    return fetch(url, requestOptions).then(handleResponse);    
+    // return fetch(url, requestOptions).then(handleResponse);    
 }
 
 // prefixed with underscored because delete is a reserved word in javascript
