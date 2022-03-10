@@ -7,4 +7,4 @@ if __name__ == "__main__":
     app.run()
 else:
     app = create_app(ProdConfig)
-    app.run()
+    app.run(debug=True)
