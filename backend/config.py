@@ -18,8 +18,8 @@ class Config:
     # LESS_RUN_IN_DEBUG = environ.get('LESS_RUN_IN_DEBUG')
 
     # # Flask-SQLAlchemy
-    SECRET_KEY = config('SECRET_KEY')
-    SQLALCHEMY_TRACK_MODIFICATIONS = config('SQLALCHEMY_TRACK_MODIFICATIONS', cast=bool)
+    SECRET_KEY = 'eb7852eb33c349v89995349d'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 class DevConfig(Config):
