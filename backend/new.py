@@ -2,7 +2,7 @@ from datetime import datetime
 
 from flask import Flask, Blueprint, jsonify, make_response, request
 from models import User
-from exts import db
+from Flask-SQLAlchemy import SQLAlchemy
 from flask_cors import CORS
 from config import ProdConfig
 from config import DevConfig
@@ -23,6 +23,7 @@ logout_msg_success = {"msg": "Logout Successful !"}
 
 app = Flask(__name__)
 CORS(app)
+db = SQLAlchemy()
 db.init_app(app)
 JWTManager(app)
 login_manager = LoginManager()
