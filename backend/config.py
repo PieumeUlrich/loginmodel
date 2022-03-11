@@ -25,11 +25,13 @@ class Config:
 class DevConfig(Config):
     FLASK_ENV = config('FLASK_ENV')
     SQLALCHEMY_DATABASE_URI = "sqlite:///"+path.join(basedir, 'db.sqlite')
+    MONGO_URI=''
     DEBUG = True
     SQLALCHEMY_ECHO = True
 
 
 class ProdConfig(Config):
     SQLALCHEMY_DATABASE_URI = "sqlite:///"+path.join(basedir, 'prod.sqlite')
+    MONGO_URI=''
     DEBUG = False
     SQLALCHEMY_ECHO = True

@@ -14,10 +14,10 @@ def create_app(config):
     app.config.from_object(config)
     CORS(app)
     db.init_app(app)
-    login_manager = LoginManager()
-    login_manager.init_app(app)
-    login_manager.login_view = 'login'
-    JWTManager(app)
+    # login_manager = LoginManager()
+    # login_manager.init_app(app)
+    # login_manager.login_view = 'login'
+    # JWTManager(app)
 
 
     @app.shell_context_processor
@@ -28,9 +28,9 @@ def create_app(config):
             }
     with app.app_context():
         # Imports
-        api = Api(app, doc='/menu')
-        api.add_namespace(user)
-        api.add_namespace(auth)
+        # api = Api(app, doc='/menu')
+        # api.add_namespace(user)
+        # api.add_namespace(auth)
 
         db.create_all()
         return app
