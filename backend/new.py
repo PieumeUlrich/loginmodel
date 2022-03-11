@@ -2,7 +2,7 @@ from datetime import datetime
 
 from flask import Flask, Blueprint, jsonify, make_response, request
 from models import User
-from Flask-SQLAlchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from config import ProdConfig
 from config import DevConfig
