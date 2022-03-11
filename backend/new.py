@@ -22,6 +22,7 @@ logout_msg_success = {"msg": "Logout Successful !"}
 
 
 app = Flask(__name__)
+app.config.from_object(ProdConfig)
 CORS(app)
 db = SQLAlchemy()
 db.init_app(app)
