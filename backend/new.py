@@ -32,8 +32,8 @@ login_manager.init_app(app)
 
 
 
-@app.route('/', methods=['GET'])
-@app.route('/index', methods=['GET'])
+@app.route('/api', methods=['GET'])
+@app.route('/api/index', methods=['GET'])
 def Index():
 	user = {'username': 'Miguel'}
 	posts = [
@@ -49,7 +49,7 @@ def Index():
 	return jsonify({"posts":posts, "users":user})
 
 
-@app.route('/users', methods=['GET'])
+@app.route('/api/users', methods=['GET'])
 @jwt_required()
 def Users():
 	users = list()
@@ -59,7 +59,7 @@ def Users():
 
 
 
-@app.route('/signup', methods=['POST'])
+@app.route('/api/signup', methods=['POST'])
 def signup():
 	data = request.get_json()
 	email = data['email']
@@ -81,7 +81,7 @@ def signup():
 	return make_response(jsonify(success_msg), 201)
 
 
-@app.route('/login', methods=['POST'])
+@app.route('/api/login', methods=['POST'])
 def login():
 	data = request.get_json()
 
@@ -111,7 +111,7 @@ def login():
     # if the above check passes, then we know the user has the right credentials
 
 
-@app.route('/refresh', methods=['POST'])
+@app.route('/api/refresh', methods=['POST'])
 # @jwt_required(refresh=True)
 def RefreshResource(Resource):
 	cur_user = get_jwt_identity()
