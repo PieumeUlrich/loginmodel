@@ -29,6 +29,6 @@ class BlacklistToken():
         # check whether auth token has been blacklisted
         res = self.collection.find_one(dict(token=str(auth_token)))
         if res:
-            return True  
+            return True
         else:
             return False

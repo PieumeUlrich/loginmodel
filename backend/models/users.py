@@ -1,5 +1,4 @@
 from setup import db, dateFormat
-# from BISON import ObjectId
 from datetime import datetime, timedelta
 import jwt
 from .blacklistedToken import BlacklistToken
@@ -11,7 +10,7 @@ BCRYPT_LOG_ROUNDS = 13
 class User():
     collection = db.users
 
-    def __init__(self, _id=None, email="", password="", name="", registeredOn=datetime.now().strftime(dateFormat),updatedOn=datetime.now().strftime(dateFormat), active=True, admin=True):
+    def __init__(self, _id=None, email="", password="", name="", registeredOn=datetime.now().strftime(dateFormat), updatedOn=datetime.now().strftime(dateFormat), active=True, admin=True):
         self._id = _id
         self.email = email
         self.name = name
