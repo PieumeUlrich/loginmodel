@@ -14,8 +14,8 @@ from api.sub_education import sub_education
 from api.speciality import specialty
 # from api.subject import subject
 # from api.resources import resource
-# from api.video import video
-# from api.timetable import timetable
+# from api.student import student
+from api.teacher import teacher
 # from api.newses import news
 
 
@@ -50,8 +50,8 @@ app.register_blueprint(sub_education)
 app.register_blueprint(specialty)
 # app.register_blueprint(subject)
 # app.register_blueprint(resource)
-# app.register_blueprint(video)
-# app.register_blueprint(timetable)
+app.register_blueprint(teacher)
+# app.register_blueprint(student)
 # app.register_blueprint(news)
 
 
